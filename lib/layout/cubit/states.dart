@@ -1,12 +1,12 @@
 abstract class NewsStates {}
 
-class NewsIntialState extends NewsStates {}
+class NewsInitialState extends NewsStates {}
 
-class NewsButtomNavState extends NewsStates {}
+class NewsBottomNavState extends NewsStates {}
 
 class NewsGetBusinessLoadingState extends NewsStates {}
 
-class NewsGetBusinessSucessState extends NewsStates {}
+class NewsGetBusinessSuccessState extends NewsStates {}
 
 class NewsGetBusinessErrorState extends NewsStates {
   final String error;
@@ -14,22 +14,22 @@ class NewsGetBusinessErrorState extends NewsStates {
   NewsGetBusinessErrorState(this.error);
 }
 
-class NewsGetScienceLoadingState extends NewsStates {}
-
-class NewsGetScienceSucessState extends NewsStates {}
-
-class NewsGetScienceErrorState extends NewsStates {
-  final String error;
-
-  NewsGetScienceErrorState(this.error);
-}
-
 class NewsGetSportsLoadingState extends NewsStates {}
 
-class NewsGetSportsSucessState extends NewsStates {}
+class NewsGetSportsSuccessState extends NewsStates {}
 
 class NewsGetSportsErrorState extends NewsStates {
   final String error;
 
   NewsGetSportsErrorState(this.error);
+}
+
+class NewsGetScienceLoadingState extends NewsStates {}
+
+class NewsGetScienceSuccessState extends NewsStates {}
+
+class NewsGetScienceErrorState extends NewsStates {
+  final String error;
+
+  NewsGetScienceErrorState(this.error);
 }

@@ -5,22 +5,33 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:news_app/layout/news_layout.dart';
 import 'package:news_app/shared/cubit/cubit.dart';
 import 'package:news_app/shared/cubit/states.dart';
+import 'package:news_app/shared/local/cash_helper.dart';
 import 'package:news_app/shared/network/dio_helper.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   //Bloc.observer = MyBlocObserver();
   DioHelper.init();
+  await CashHelper.init();
 
-  runApp(const MyApp());
+  bool isDark = CashHelper.getBoolean(key: "isDark");
+
+  runApp(MyApp(isDark));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  final bool isDark;
+
+  MyApp(this.isDark);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit(),
+      create: (BuildContext context) => AppCubit()
+        ..changeAppMode(
+          fromShared: isDark,
+        ),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -76,7 +87,7 @@ class MyApp extends StatelessWidget {
                 backwardsCompatibility: false,
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: HexColor('333739'),
-                  statusBarBrightness: Brightness.light,
+                  //statusBarBrightness: Brightness.light,
                 ),
                 titleTextStyle: const TextStyle(
                   color: Colors.white,
