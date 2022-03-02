@@ -78,7 +78,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getScience() {
     emit(NewsGetScienceLoadingState());
 
-    if (science.length > 0) {
+    if (science.isNotEmpty) {
       DioHelper.getData(
         url: 'v2/top-headlines',
         query: {
@@ -106,7 +106,7 @@ class NewsCubit extends Cubit<NewsStates> {
   void getSports() {
     emit(NewsGetSportsLoadingState());
 
-    if (sports.length > 0) {
+    if (sports.isNotEmpty) {
       DioHelper.getData(
         url: 'v2/top-headlines',
         query: {
