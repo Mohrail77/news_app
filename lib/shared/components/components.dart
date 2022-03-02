@@ -70,3 +70,30 @@ Widget articleBuilder(list, context) => ConditionalBuilder(
       ),
       fallback: (context) => const Center(child: CircularProgressIndicator()),
     );
+
+Widget defaultTextform({
+  @required TextEditingController controller,
+  @required TextInputType textInputType,
+  @required Function validate,
+  Function onSubmitted,
+  Function onchanged,
+  Function onTap,
+  @required String labeltext,
+  @required IconData prefix,
+  IconData suffix,
+  bool observedtext = false,
+}) =>
+    TextFormField(
+      controller: controller,
+      keyboardType: textInputType,
+      obscureText: observedtext,
+      onFieldSubmitted: onSubmitted,
+      onChanged: onchanged,
+      validator: validate,
+      decoration: InputDecoration(
+        labelText: labeltext,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+        prefixIcon: Icon(prefix),
+        suffix: Icon(suffix),
+      ),
+    );

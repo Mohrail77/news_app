@@ -8,6 +8,8 @@ import 'package:news_app/shared/cubit/states.dart';
 import 'package:news_app/shared/local/cash_helper.dart';
 import 'package:news_app/shared/network/dio_helper.dart';
 
+import 'layout/cubit/cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,11 +29,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => AppCubit()
-        ..changeAppMode(
-          fromShared: isDark,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsCubit()
+            ..getBusiness()
+            ..getSports()
+            ..getScience(),
         ),
+        BlocProvider(
+          create: (BuildContext context) => AppCubit()
+            ..changeAppMode(
+              fromShared: isDark,
+            ),
+        ),
+      ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
